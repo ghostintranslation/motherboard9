@@ -120,6 +120,7 @@ inline Motherboard9::Motherboard9(){
 
   this->inputs = new byte[this->ioNumber];
   this->leds = new byte[this->ioNumber];
+  this->ledsDuration = new unsigned int[this->ioNumber];
   this->buttons = new bool[this->ioNumber];
   this->potentiometers = new unsigned int[this->ioNumber];
   this->potentiometersTemp = new unsigned int[this->ioNumber];
@@ -131,7 +132,6 @@ inline Motherboard9::Motherboard9(){
   for(byte i = 0; i < this->ioNumber; i++){
     this->inputs[i] = 0;
     this->leds[i] = 0;
-    this->ledsDuration = new unsigned int[this->ioNumber];
     this->ledsDuration[i] = 0;
     this->buttons[i] = true;
     this->potentiometers[i] = 0;
