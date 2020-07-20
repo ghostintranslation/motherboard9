@@ -131,6 +131,7 @@ inline Motherboard9::Motherboard9(){
   for(byte i = 0; i < this->ioNumber; i++){
     this->inputs[i] = 0;
     this->leds[i] = 0;
+    this->ledsDuration = new unsigned int[this->ioNumber];
     this->ledsDuration[i] = 0;
     this->buttons[i] = true;
     this->potentiometers[i] = 0;
