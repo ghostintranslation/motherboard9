@@ -416,6 +416,7 @@ inline void Motherboard9::updateDisplay(){
         this->writeLED(this->currentLed);
       }
     break;
+
     case 4:
       // Solid for 50 milliseconds
       this->writeLED(this->currentLed);
@@ -429,11 +430,13 @@ inline void Motherboard9::updateDisplay(){
         this->ledsDuration[this->currentLed] = 0;
       }
     break;
+
     case 5:
       // Solid low birghtness
       this->ledsBrightness[this->currentLed] = 128;
       this->writeLED(this->currentLed);
     break;
+
     default:
       digitalWriteFast(22, HIGH);
     break;
@@ -669,14 +672,14 @@ inline void Motherboard9::readEncoder(byte inputIndex) {
     byte result = this->encodersState[inputIndex] & 0x30;
 
     if (result == DIR_CW) {
-     this->encoders[inputIndex]--;
+      this->encoders[inputIndex]--;
       
       // Calling the decrement callback if there is one
       if(this->inputsRotaryChangeCallback[inputIndex] != nullptr){
         this->inputsRotaryChangeCallback[inputIndex](false);
       }
     } else if (result == DIR_CCW) {
-     this->encoders[inputIndex]++;
+      this->encoders[inputIndex]++;
       
       // Calling the decrement callback if there is one
       if(this->inputsRotaryChangeCallback[inputIndex] != nullptr){
@@ -789,8 +792,23 @@ inline void Motherboard9::readMidiChannel(){
 /**
  * Set a led status
  */
-inline void Motherboard9::setLED(byte ledIndex, byte ledStatus, byte ledBrightness) {
-  this->leds[ledIndex] = ledStatus;
+inline void Motherboard6::setLED(byte ledIndex, byte ledStatus, byte ledBrightness) {
+  switch(ledStatus){
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+    case 5:
+    {
+      this->leds[ledIndex] = ledStatus;
+      this->ledsBrightness[ledIndex] = ledBrightness;
+    }
+    break;
+    default:
+      this->leds[ledIndex] = 0;
+    break;
+  }
 }
 
 /**
