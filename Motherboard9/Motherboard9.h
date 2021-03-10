@@ -792,7 +792,7 @@ inline void Motherboard9::readMidiChannel(){
 /**
  * Set a led status
  */
-inline void Motherboard6::setLED(byte ledIndex, byte ledStatus, byte ledBrightness) {
+inline void Motherboard9::setLED(byte ledIndex, byte ledStatus, byte ledBrightness) {
   switch(ledStatus){
     case 0:
     case 1:
@@ -964,15 +964,9 @@ inline void Motherboard9::setHandleRotaryChange(byte inputIndex, RotaryChangeCal
   }
 }
 
-inline void Motherboard6::writeLED(byte index){
-  if(this->ledsBrightness[index] == 255){
-    digitalWriteFast(22, LOW);
-  }else if(this->ledsBrightness[index] == 0){
-    digitalWriteFast(22, HIGH);
-  }else{
-    byte reversedBrightness = map(this->ledsBrightness[index], 0, 255, 255, 0);
-    analogWrite(22, reversedBrightness); 
-  }
+inline void Motherboard9::writeLED(byte index){
+  byte reversedBrightness = map(this->ledsBrightness[index], 0, 255, 255, 0);
+  analogWrite(22, reversedBrightness); 
 }
 
 /**
